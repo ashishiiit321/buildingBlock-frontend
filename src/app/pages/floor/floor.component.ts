@@ -18,6 +18,7 @@ export class FloorComponent implements OnInit {
   noOfHouse = ''
 
   floorToDelete = <any>{}
+  floorToEdit = <any>{}
   pageLoaded = false;
 
   floorDetails = <any>{};
@@ -38,6 +39,7 @@ export class FloorComponent implements OnInit {
       this.buildlingId = this.activatedRoute.snapshot.paramMap.get("buildingId")
 
       this.building = await this.floorService.getBuilding(this.buildlingId);
+      console.log("building ",this.building)
       
       this.floorDetails = this.building[0].floor[0]
 
@@ -81,23 +83,61 @@ export class FloorComponent implements OnInit {
     }
 }
 
+
+
 async deleteFloor() {
   try{
 
     let result = await this.floorService.deleteFloor(this.floorToDelete._id, this.buildlingId);
-    console.log(result);
+
     var index = this.building[0].floor.indexOf(this.floorToDelete._id)
 
     this.building[0].floor.splice(index, 1)
-
     
-    if(!this.building[0].floor[0]) {
+    if(!this.building[0].floor[0] || this.floorToDelete._id == this.floorDetails._id) {
       this.floorDetails = this.building[0].floor[0]
     }
 
   } catch(err) {
     console.log(err);
   }
+}
+
+
+async editFloor() {
+  var index;
+  var data = {}
+
+  if(this.floorDescription)
+    data['description'] = this.floorDescription
+
+    if(this.floorName)
+    data['floorName'] = this.floorName
+
+    if(this.noOfHouse)
+    data['noOfHouse'] = this.noOfHouse
+
+
+    let res = await this.floorService.updateFloor(this.floorToEdit._id, data);
+
+    for(var i=0;i<this.building[0].floor.length; i++) {
+      if(this.building[0].floor[i]._id === this.floorToEdit._id){
+        index = i;
+        break;
+      }
+    }
+
+    if(this.floorDetails._id == this.floorToEdit._id) {
+      this.floorDetails = res;
+    }
+
+    this.building[0].floor[index] = res;
+
+    this.floorDescription= '';
+    this.floorName= '';
+    this.noOfHouse = '';
+
+
 }
 
 

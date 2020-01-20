@@ -23,5 +23,9 @@ export class FloorService {
   deleteFloor(floorId, buildingId) {
     return this.http.delete(this.url + '/floor/'+floorId+"?buildingId="+buildingId).toPromise()
   }
+
+  updateFloor(floorId, data) {
+    return this.http.put(this.url + '/floor/'+floorId, data).toPromise()
+  }
   
 }
