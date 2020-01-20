@@ -29,13 +29,7 @@
           <div class="text-center text-muted mb-4">
             <small>Sign in with credentials</small>
           </div>
-          <div class="text-center text-muted" *ngIf="registeredFlag || authError || authProcess">
-            <span *ngIf="registeredFlag" style="color: green">You are registered. Login Here.</span>
-            <span *ngIf="authError" style="color: red;">Invalid Credentials</span>
-            <span *ngIf="authProcess==1" style="color: #10508D;">Authenticating... Please wait</span>
-            <span *ngIf="authProcess==2" style="color: green;">Login successful. Redirecting to dashboard.</span>
-            <br><br>
-          </div>
+         
           <form role="form">
             <div class="form-group mb-3">
               <div class="input-group input-group-alternative">
@@ -69,22 +63,12 @@
       </div>
 
 
-
-
-  
-
-
       <div class="row mt-3">
         <div class="col-6">
           <a href="javascript:void(0)" class="text-light"><small>Forgot password?</small></a>
         </div>
-        <div class="col-6 text-right" *ngIf="type=='login'">
-          <a href="javascript:void(0)" (click)="switchType('signup')" class="text-light"><small>Create new
-              account</small></a>
-        </div>
-        <div class="col-6 text-right" *ngIf="type=='signup'">
-          <a href="javascript:void(0)" (click)="switchType('login')" class="text-light"><small>Login Here</small></a>
-        </div>
+       
+       
 
       </div>
     </div>
