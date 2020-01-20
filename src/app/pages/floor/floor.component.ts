@@ -90,7 +90,9 @@ async deleteFloor() {
 
     let result = await this.floorService.deleteFloor(this.floorToDelete._id, this.buildlingId);
 
-    var index = this.building[0].floor.indexOf(this.floorToDelete._id)
+    var index = this.building[0].floor.indexOf(this.floorToDelete)
+    console.log("index to delete",index)
+    console.log("this.floorToDelete._id",this.floorToDelete._id)
 
     this.building[0].floor.splice(index, 1)
     
