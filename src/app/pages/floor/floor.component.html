@@ -1,0 +1,187 @@
+<div *ngIf="!pageLoaded">
+  <div class="boxes">
+          <div class="box">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+          </div>
+          <div class="box">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+          </div>
+          <div class="box">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+          </div>
+          <div class="box">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+          </div>
+      </div>
+</div>
+
+
+<div *ngIf="pageLoaded">
+  <div class="pb-7  pt-md-8" style="background-color:#1e3a5c;">
+  </div>
+
+  <div class="container-fluid mt--7">
+    <div class="row">
+
+      <!-- The modal -->
+      <div class="modal fade" id="myModalForFloor">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+              <h4 class="modal-title w-100 font-weight-bold">Add New Floor</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body mx-2">
+              <!--  floorName Name -->
+              <div class="md-form mb-4">
+                <label>Enter Floor Name</label>
+                <input type="text" [(ngModel)]="floorName" class="form-control validate">
+              </div>
+              <div class="md-form mb-4">
+                <label>Enter No. of houses</label>
+                <input type="text" [(ngModel)]="noOfHouse" class="form-control validate">
+              </div>
+              <div class="md-form mb-4">
+                <label>Enter Floor Description</label>
+                <input type="text" [(ngModel)]="floorDescription" class="form-control validate">
+              </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+              <button class="btn btn-default" (click)="addFloor()" data-dismiss="modal" id="addition-btn">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- The modal  End -->
+
+
+      <!-- Delete Modal Start  -->
+      <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              This will delete your floor. Are you sure?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)='deleteFloor()'>Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delete Modal End  -->
+
+
+
+      <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+        <div class="card bg-secondary shadow" style="min-height:60vh;">
+
+          <div class="card-header bg-white border-0">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <h3 class="mb-0">Floor Details here</h3>
+
+              </div>
+              <div class="col-4 text-right">
+                <!-- <a href="#!" class="btn btn-sm btn-default">Broadcast</a> -->
+              </div>
+            </div>
+          </div>
+          <div class="card-body row " style="height: 0px;">
+            <div class=" col-md-12 col-sm-12 col-12" *ngIf="floorDetails">
+              <div>
+                <h3>Floor Name</h3>
+                <div style=" text-transform: capitalize;position: relative;top:-10px;">{{floorDetails.floorName}}</div>
+                <hr style="position: relative;top:-32px;">
+              </div>
+
+              <div style="position: relative;top:-38px;">
+                <h3>Floor Description</h3>
+                <div style=" text-transform: capitalize;position: relative;top:-10px;">{{floorDetails.description}}</div>
+                <hr style="position: relative;top:-32px;">
+              </div>
+
+              <div style="position: relative;top:-76px;">
+                <h3>No. of Houses</h3>
+                <div style="position: relative;top:-10px;">{{floorDetails.noOfHouse}}
+                </div>
+                <hr style="position: relative;top:-32px;">
+              </div>
+
+             
+
+            </div>
+            <div *ngIf="!floorDetails" style="color: red;">No Floor to display the data</div>
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="col-xl-8 order-xl-1">
+        <div class="card bg-secondary shadow" style="min-height:60vh;">
+          <div class="card-header bg-white border-0">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <a href="javascript:void(0)" class="btn btn-default btn-icon " data-toggle="modal"
+                  data-target="#myModalForFloor" (click)="deptName=''">
+                  <span class="btn-inner--icon"><i class="fa fa-plus" aria-hidden="true"></i>
+                  </span>
+                  <span class="btn-inner--text">Add Floor</span>
+                </a>
+
+              </div>
+
+
+            </div>
+          </div>
+
+          <div class="card-body">
+
+            <div *ngIf="!building[0]?.floor.length" style="color: red;">No Floor added.</div>
+            <div class="add-module card mt-2" *ngFor="let floor of building[0]?.floor; let i=index">
+              <div class="card-header" style="background-color:white;padding: 0; cursor:pointer">
+                <div class="mb-0 position-relative font-av-heavy items-alignment" (click)="floorDetails=floor" style="display:inline-block;">
+                  <div style="display:inline-block;background-color: #c2c5c5;padding: 1vw;">{{i+1}}</div>
+                  <div style="color:black;display:inline-block;padding: 1vw">{{floor.floorName}}
+                    <i class="fas fa-times-circle" style="display:inline-block;padding-left:1vw;"
+                      data-target="#deleteModal" data-toggle="modal" (click)="floorToDelete=floor"></i>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

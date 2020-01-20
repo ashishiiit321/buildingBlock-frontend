@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment'
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class BuildingService {
 
-   url = environment.apiURL;
+  url = environment.apiURL;
   constructor(private http: HttpClient) { }
 
 
@@ -26,8 +24,5 @@ export class BuildingService {
     return this.http.delete(this.url + '/building/'+buildingId).toPromise()
 
   }
-
-
-  
 
 }

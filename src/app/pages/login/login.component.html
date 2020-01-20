@@ -1,0 +1,92 @@
+
+
+<div class="header bg-gradient-danger py-lg-8" style="padding-top: 12rem !important;padding-bottom: 12rem !important;">
+  <div class="container">
+    <div class=" text-center ">
+      <div class="row justify-content-center" style="margin-top:-136px;">
+        <div class="col-lg-5 col-md-6">
+            <a class="navbar-brand text-center">
+                <img src="" style="height:80px;">
+            </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="separator separator-bottom separator-skew zindex-100">
+    <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+    </svg>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container" style="margin-top: -15rem !important;">
+  <div class="row justify-content-center">
+    <div class="col-lg-5 col-md-7">
+
+
+      <div class="card bg-secondary shadow border-0" style="height:443px">
+        <div class="card-body px-lg-5 py-lg-5">
+          <div class="text-center text-muted mb-4">
+            <small>Sign in with credentials</small>
+          </div>
+          <div class="text-center text-muted" *ngIf="registeredFlag || authError || authProcess">
+            <span *ngIf="registeredFlag" style="color: green">You are registered. Login Here.</span>
+            <span *ngIf="authError" style="color: red;">Invalid Credentials</span>
+            <span *ngIf="authProcess==1" style="color: #10508D;">Authenticating... Please wait</span>
+            <span *ngIf="authProcess==2" style="color: green;">Login successful. Redirecting to dashboard.</span>
+            <br><br>
+          </div>
+          <form role="form">
+            <div class="form-group mb-3">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                </div>
+                <input class="form-control" placeholder="Email" [(ngModel)]=email
+                  (keyup.enter)="checkCredentials()" type="text" name="email">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative" style="margin-bottom: 10px">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                </div>
+                <input class="form-control" [(ngModel)]=password (keyup.enter)="checkCredentials()"
+                  placeholder="Password" type="password" name="password">
+              </div>
+            </div>
+            <div class="custom-control custom-control-alternative custom-checkbox">
+              <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
+              <label class="custom-control-label" for=" customCheckLogin">
+                <span class="text-muted">Remember me</span>
+              </label>
+            </div>
+            <div class="text-center">
+              <button type="button" class="btn btn-primary my-4" (click)="checkCredentials()">Sign in</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+
+
+
+  
+
+
+      <div class="row mt-3">
+        <div class="col-6">
+          <a href="javascript:void(0)" class="text-light"><small>Forgot password?</small></a>
+        </div>
+        <div class="col-6 text-right" *ngIf="type=='login'">
+          <a href="javascript:void(0)" (click)="switchType('signup')" class="text-light"><small>Create new
+              account</small></a>
+        </div>
+        <div class="col-6 text-right" *ngIf="type=='signup'">
+          <a href="javascript:void(0)" (click)="switchType('login')" class="text-light"><small>Login Here</small></a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

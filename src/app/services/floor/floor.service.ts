@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment'
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class FloorService {
 
-   url = environment.apiURL;
+ 
+  url = environment.apiURL;
   constructor(private http: HttpClient) { }
 
 
@@ -17,11 +16,12 @@ export class FloorService {
     return this.http.post(this.url + '/floor', data).toPromise()
   }
 
-  deleteFloor(floorId, buildingId) {
-    return this.http.delete(this.url + '/floor/'+floorId+"?buildingId="+buildingId).toPromise()
-
+  getBuilding(buildingId) {
+  	return this.http.get(this.url + "/building?_id="+buildingId).toPromise()
   }
 
-
- 
+  deleteFloor(floorId, buildingId) {
+    return this.http.delete(this.url + '/floor/'+floorId+"?buildingId="+buildingId).toPromise()
+  }
+  
 }
