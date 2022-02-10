@@ -28,7 +28,7 @@
     "core-js": "2.6.4",
     "ngx-clipboard": "11.1.9",
     "ngx-toastr": "9.1.2",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "nouislider": "13.1.1",
     "rxjs": "6.4.0",
     "zone.js": "0.8.29"
